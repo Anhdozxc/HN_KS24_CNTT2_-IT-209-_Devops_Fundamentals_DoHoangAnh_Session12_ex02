@@ -20,6 +20,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
+      - name: Sanitize image name
+        run: echo "IMAGE_NAME=$(echo '${{ env.IMAGE_NAME }}' | sed 's/_-/_/g; s/-_/_/g')" >> $GITHUB_ENV
+
       - name: Log in to the Container registry
         uses: docker/login-action@v3
         with:
